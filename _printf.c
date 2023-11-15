@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 				write(1, format, 1);
 				lets_print++;
 			else if (*format == 'c')
-			char c = va_arg(arguments, int);
+			char c = va_arg(arguments, char);
 
 			write(1, &c, 1);
 			lets_print++;
