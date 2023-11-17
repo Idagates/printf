@@ -29,6 +29,8 @@ int print_int(int n)
 {
 	char digit;
 	int length = 0;
+	char buffer[20];
+	int index = 0;
 
 	if (n < 0)
 	{
@@ -41,9 +43,6 @@ int print_int(int n)
 		write(1, "0", 1);
 		return (1);
 	}
-	char buffer[20];
-	int index = 0;
-
 	while (n > 0)
 	{
 		digit = '0' + (n % 10);
