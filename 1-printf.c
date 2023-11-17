@@ -1,4 +1,35 @@
 #include "main.h"
+#include <stdio.h>
+
+/**
+ * print_string - a function that prints a strings
+ * @str: the string to print
+ * Return: the number of string
+ */
+
+int print_string(char *str)
+{
+	int length = 0;
+
+	while (*str != '\0')
+	{
+		write(1, &*str, 1);
+		str++;
+		length++;
+	}
+	return (length);
+}
+
+/**
+ * print_int - prints an integer
+ * @n: the integer to print
+ * Return: an integer
+ */
+int print_int(int n)
+{
+	return (0);
+}
+
 /**
  * _printf - a function that produces output according to format
  * @format: the format character string
@@ -9,6 +40,62 @@ int _printf(const char *format, ...)
 	int lets_print = 0;
 	va_list arguments;
 
-	if (format == NULL)
-                return (-1);
 	va_start(arguments, format);
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (*format == 'c')
+			{
+				char s = va_arg(arguments, int);
+
+				lets_print += write(1, &s, 1);
+			}
+			else if (*format == 's')
+			{
+				char *str = va_arg(arguments, char*);
+
+				lets_print += print_string(str);
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				int number = va_arg(arguments, int);
+
+				lets_print += print_int(number);
+			}
+			else
+				write(1, "unidentified format specifier", 1);
+				return (-1);
+		}
+		else
+		{
+		write(1, format, 1);
+		lets_print++;
+		format++;
+		}
+	}
+	va_end(arguments);
+	return (lets_print);
+}
+
+/**
+ * main - tests what _printf has written
+ * Return: 0 (success)
+ */
+
+int main(void)
+{
+	printf("This is a trial\n");
+	printf("This is a number %d \n", 30);
+	printf("This is a name %s \n", "Ida");
+	printf("This is a character %c \n", 'A');
+	printf("This is a special character \n");
+	_printf("This is a trial\n");
+	_printf("This is a number %d\n", 30);
+	_printf("This is a name %s\n", "Ida");
+	_printf("This is a character %c\n", 'A');
+	_printf("This is a special character\n");
+
+	return (0);
+}
