@@ -78,24 +78,3 @@ int _printf(const char *format, ...)
 	va_end(arguments);
 	return (lets_print);
 }
-
-/**
- * main - tests what _printf has written
- * Return: 0 (success)
- */
-
-int main(void)
-{
-	printf("This is a trial\n");
-	printf("This is a number %d \n", 30);
-	printf("This is a name %s \n", "Ida");
-	printf("This is a character %c \n", 'A');
-	printf("This is a special character \n");
-	_printf("This is a trial\n");
-	_printf("This is a number %d\n", 30);
-	_printf("This is a name %s\n", "Ida");
-	_printf("This is a character %c\n", 'A');
-	_printf("This is a special character\n");
-
-	return (0);
-}
