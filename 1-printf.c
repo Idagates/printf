@@ -68,7 +68,7 @@ int _printf(const char *format, ...)
 	va_list arguments;
 
 	va_start(arguments, format);
-	while (*format != '\0')
+	for (; *format != '\0'; format++)
 	{
 		if (*format == '%')
 		{
@@ -93,7 +93,6 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				write(1, "unidentified format specifier", 1);
 				return (-1);
 			}
 		}
@@ -102,7 +101,6 @@ int _printf(const char *format, ...)
 		write(1, format, 1);
 		lets_print++;
 		}
-		format++;
 	}
 	va_end(arguments);
 	return (lets_print);
