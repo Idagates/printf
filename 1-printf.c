@@ -27,7 +27,35 @@ int print_string(char *str)
  */
 int print_int(int n)
 {
-	return (0);
+	char digit;
+	int length = 0;
+
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+		length++;
+	}
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
+	char buffer[20];
+	int index = 0;
+
+	while (n > 0)
+	{
+		digit = '0' + (n % 10);
+		buffer[index++] = digit;
+		n /= 10;
+		length++;
+	}
+	while (index > 0)
+	{
+		write(1, &buffer[--index], 1);
+	}
+	return (length);
 }
 
 /**
@@ -65,15 +93,17 @@ int _printf(const char *format, ...)
 				lets_print += print_int(number);
 			}
 			else
+			{
 				write(1, "unidentified format specifier", 1);
 				return (-1);
+			}
 		}
 		else
 		{
 		write(1, format, 1);
 		lets_print++;
-		format++;
 		}
+		format++;
 	}
 	va_end(arguments);
 	return (lets_print);
